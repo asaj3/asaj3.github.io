@@ -10,7 +10,7 @@
    <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
 	#map {
-		width: 100%;
+		width: 80%;
 		height: 800px;
 		background-color: grey;
 	}
@@ -38,7 +38,7 @@ var markers = []
 var icons = []
 var flag = true;
 		
-d3.tsv("attractions_sample.tsv").then(function(data) { 
+d3.tsv("attractions.tsv").then(function(data) { 
 
 	data.forEach(function(d) {
 		d["id"] = +d["id"];
@@ -81,13 +81,14 @@ d3.tsv("attractions_sample.tsv").then(function(data) {
 
 			d3.select("body")
 				.append("div")
+				.attr("style","margin-left:" + w/10 + "px; margin-top:" + 0 + "px;")
 				.attr("class", "map")
 				.attr("id","map");
 
 			var results = JSON.parse(data[k]["attractions"])
 
 			var map = new L.Map("map", {center: [data[k]["latitude"],data[k]["longitude"]], 
-				zoom: 15,closePopupOnClick:true})
+				zoom: 13,closePopupOnClick:true})
 				.addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 				{attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
 				}));
@@ -125,7 +126,8 @@ d3.tsv("attractions_sample.tsv").then(function(data) {
 					'<br>Distance from listed house: '+ feature.properties.distance +
 					'm<br>Location : <a href="https://www.google.com/maps/dir/?api=1&destination='+ feature.geometry.coordinates[1] + 
 					"," + feature.geometry.coordinates[0] + '" target="_blank">' + 
-					feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + '</a></center>'),
+					feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + '</a><br>Opening Hours<br>' +
+					feature.properties.openingHours + '</center>'),
 					{closeButton: false});
 					layer.on('click', function() {
 						layer.openPopup();
