@@ -38,7 +38,7 @@ var markers = []
 var icons = []
 var flag = true;
 		
-d3.tsv("attractions.tsv").then(function(data) { 
+d3.tsv("attractions_sample.tsv").then(function(data) { 
 
 	data.forEach(function(d) {
 		d["id"] = +d["id"];
