@@ -38,7 +38,7 @@ var markers = []
 var icons = []
 var flag = true;
 		
-d3.tsv("attractions_sample.tsv").then(function(data) { 
+d3.csv("attractions_sample.csv").then(function(data) { 
 
 	data.forEach(function(d) {
 		d["id"] = +d["id"];
@@ -98,7 +98,8 @@ d3.tsv("attractions_sample.tsv").then(function(data) {
 				data[k]["listing_url"] + '" target="_blank">AirBnB Link</a><br>Listing entry : ' +
 				data[k]["name"] + '<br>Listed house location :  <a href="https://www.google.com/maps/dir/?api=1&destination=' +
 				data[k]["latitude"] + "," + data[k]["longitude"] +'" target="_blank">' + data[k]["latitude"] + "," + data[k]["longitude"] + 
-				'</a></center>');
+				'</a><br>Room Type : '+ data[k]["room_type"] + '<br>Number of Beds : ' + data[k]["beds"] + '<br>Price : $' +
+				data[k]["price"] + '</center>');
 
 			house = L.marker([data[k]["latitude"],data[k]["longitude"]]).addTo(map)
 			house.bindPopup(popuph);
