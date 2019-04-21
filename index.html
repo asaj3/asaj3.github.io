@@ -26,8 +26,8 @@
 	  line-height: 1;
 	  font: 15px sans-serif;
 	  padding: 5px;
-	  background: rgba(50, 100, 0, 0.8);
-	  color: #fff;
+	  background: rgba(229,245,224, 0.9);
+	  color: #000;
 	  border-radius: 10px;
 	}
 	
@@ -74,6 +74,7 @@
  
 var flag = true;
 var flag2 = true;
+var flag3 = true;
 var attr_markers = [];
 var cScale = d3.scaleThreshold()
 			.domain(d3.range(100,1000,100))
@@ -124,7 +125,10 @@ function ready([sf, data, host_attr, attr, icon]) {
 		.html(function(d) {return '<center><img src="'+ data.filter(function (D) {return D.id==d.properties.id})[0]["picture_url"] 
 			+'" alt="src1" style="width:500px;height:300px;"><br>'
 			+ "<br><a href=" + data.filter(function (D) {return + D.id==d.properties.id})[0]["listing_url"] + '" target="_blank"><b>AirBnB Link</b></a><br>'
-			+ "<br><b>Listing Name</b> : " + data.filter(function (D) {return + D.id==d.properties.id})[0]["name"] 
+			+ "<br><b>Listing Name</b> : " + data.filter(function (D) {return + D.id==d.properties.id})[0]["name"]
+			+ "<br><b>Location</b> : <a href=https://www.google.com/maps/dir/?api=1&destination="  + 
+					d.geometry.coordinates[1] + "," + d.geometry.coordinates[0] + " target=_blank>" + 
+					d.geometry.coordinates[1].toFixed(4) + "," + d.geometry.coordinates[0].toFixed(4) + "</a>" 
 			+ "<br><b>Neighborhood</b>: " + data.filter(function (D) {return D.id==d.properties.id})[0]["neighbourhood"] 
 			+ "<br><b>Property Type</b>: " + data.filter(function (D) {return D.id==d.properties.id})[0]["property_type"] 
 			+ "<br><b>Room Type</b>: " + data.filter(function (D) {return D.id==d.properties.id})[0]["room_type"] 
@@ -219,13 +223,19 @@ function ready([sf, data, host_attr, attr, icon]) {
 						,riseOnHover:'false',opacity:0.7}).addTo(map);
 		
 				attr_markers[i].bindPopup(popup[i]);
-				attr_markers[i].on('mouseover', function() {
+				attr_markers[i].on('click', function() {
 					this.openPopup();
-					tip2.hide();
-				})
+					if (flag3)
+						flag3 = false;
+					else
+						flag3 = true;
+				});
+				attr_markers[i].on('mouseover', function() { 
+					this.openPopup(); });
 				attr_markers[i].on('mouseout', function() {
-					this.closePopup();
-				})
+					if (flag3)
+						this.closePopup(); 
+				});
 			}
 		}
 	}
@@ -277,13 +287,19 @@ function ready([sf, data, host_attr, attr, icon]) {
 						,riseOnHover:'false',opacity:0.7}).addTo(map);
 		
 				attr_markers[i].bindPopup(popup[i]);
-				attr_markers[i].on('mouseover', function() {
+				attr_markers[i].on('click', function() {
 					this.openPopup();
-					tip2.hide();
-				})
+					if (flag3)
+						flag3 = false;
+					else
+						flag3 = true;
+				});
+				attr_markers[i].on('mouseover', function() { 
+					this.openPopup(); });
 				attr_markers[i].on('mouseout', function() {
-					this.closePopup();
-				})
+					if (flag3)
+						this.closePopup(); 
+				});
 			}
 		} 
 		
@@ -348,8 +364,8 @@ function ready([sf, data, host_attr, attr, icon]) {
 		bottomRight = bounds[1];
 		var padding = 500
 		
-		svg .attr("width", bottomRight[0] - topLeft[0] + padding)
-		.attr("height", bottomRight[1] - topLeft[1] + padding)
+		svg.attr("width", bottomRight[0] - topLeft[0] + padding + "px")
+		.attr("height", bottomRight[1] - topLeft[1] + padding + "px")
 		.style("left", topLeft[0] + "px")
 		.style("top", topLeft[1] + "px");
 
