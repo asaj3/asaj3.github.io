@@ -225,13 +225,15 @@ function ready([sf, data, host_attr, attr, icon]) {
 				attr_markers[i].bindPopup(popup[i]);
 				attr_markers[i].on('click', function() {
 					this.openPopup();
+					tip2.hide();
 					if (flag3)
 						flag3 = false;
 					else
 						flag3 = true;
 				});
 				attr_markers[i].on('mouseover', function() { 
-					this.openPopup(); });
+					this.openPopup();
+					tip2.hide(); });
 				attr_markers[i].on('mouseout', function() {
 					if (flag3)
 						this.closePopup(); 
@@ -289,13 +291,15 @@ function ready([sf, data, host_attr, attr, icon]) {
 				attr_markers[i].bindPopup(popup[i]);
 				attr_markers[i].on('click', function() {
 					this.openPopup();
+					tip2.hide()
 					if (flag3)
 						flag3 = false;
 					else
 						flag3 = true;
 				});
 				attr_markers[i].on('mouseover', function() { 
-					this.openPopup(); });
+					this.openPopup();
+					tip2.hide(); });
 				attr_markers[i].on('mouseout', function() {
 					if (flag3)
 						this.closePopup(); 
