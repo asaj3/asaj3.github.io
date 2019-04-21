@@ -155,7 +155,7 @@ function ready([sf, data, host_attr, attr, icon]) {
 		svg.selectAll("text").remove()
 		svg.selectAll(".legend").remove()
 		d3.select(".leaflet-marker-pane").selectAll("img").remove()
-		svg.selectAll("path").attr("fill-opacity",0.7)
+		svg.selectAll("path").attr("fill-opacity",0.7).attr("stroke-width", "2px")
 		
 		d3.select(this).attr("fill-opacity",0)
 		var zip = d.id
@@ -307,7 +307,7 @@ function ready([sf, data, host_attr, attr, icon]) {
 		.on('mouseover', function(d) {if (flag2) { if (flag) {
 			d3.select(this).attr("fill-opacity","0"); tip1.show(d)}}
 			})
-		.on('mouseout', function(d) {if (flag2) {if (flag) {d3.select(this).attr("fill-opacity","0.9")}}; tip1.hide(d);})
+		.on('mouseout', function(d) {if (flag2) {if (flag) {if (map.getZoom()<=15){d3.select(this).attr("fill-opacity","0.9")}}}; tip1.hide(d);})
 
 	//define the data points based on the listing data
 	var points = g.append("g")
@@ -366,13 +366,13 @@ function ready([sf, data, host_attr, attr, icon]) {
 		  
 		if (map.getZoom() > 15 && flag == true && flag2 == true) {
 			svg.selectAll("circle").attr("class","coord-zoom")
-			svg.selectAll("path").attr("fill-opacity",0.1)
+			svg.selectAll("path").attr("fill-opacity",0.1).attr("stroke-width", "3px")
 			console.log(flag)
 		}
 
 		else if (map.getZoom() <= 15 && flag == true && flag2 == true) {
 			svg.selectAll("circle").attr("class","coord")
-			svg.selectAll("path").attr("fill-opacity",0.9)
+			svg.selectAll("path").attr("fill-opacity",0.9).attr("stroke-width", "1.5px")
 		}
 	
 		if (map.getZoom() == 13)
