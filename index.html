@@ -385,6 +385,11 @@ function ready([sf, data, host_attr, attr, icon]) {
 			svg.selectAll("circle").attr("class","coord-zoom").attr("r","10px")
 			svg.selectAll("path").attr("fill-opacity",0.1).attr("stroke-width", "3px")
 		}
+		
+		else if (map.getZoom() > 14 && flag == true && flag2 == true) {
+			svg.selectAll("circle").attr("class","coord-zoom").attr("r","10px")
+			svg.selectAll("path").attr("fill-opacity",0.1).attr("stroke-width", "3px")
+		}
 
 		else if (map.getZoom() <= 15 && flag == true && flag2 == true) {
 			svg.selectAll("circle").attr("class","coord").attr("r","3px")
